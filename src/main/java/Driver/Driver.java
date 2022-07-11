@@ -8,6 +8,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -59,8 +60,10 @@ public class Driver {
 	@BeforeMethod
 	public void  launchbrowser() {
 				
+		ChromeOptions opt = new ChromeOptions();
+		opt.addArguments("disable-infobars");
 		System.setProperty("webdriver.chrome.driver", "D:\\Jars\\Chrome\\chromedriver_win32\\chromedriver.exe");
-		driver = new ChromeDriver();
+		driver = new ChromeDriver(opt);
 		driver.manage().window().maximize();
 		
 	}
