@@ -3,6 +3,7 @@ package Driver;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -28,6 +29,7 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 
 import other.screenshot;
 import other.suiteListener;
@@ -43,13 +45,6 @@ public class Driver {
 	
 	screenshot ss=new screenshot();
 	
-	public void takescreenshot(String filename) throws IOException {
-		//take the screenshot and save it as a file format
-		File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		//copy the screenshot to desired location using copy file method
-		FileUtils.copyFile(file, new File("D:\\\\StudyNew\\\\WorkSpace\\\\screenshot\\\\screenshot"+filename+".jpg"));
-		
-	}
 
 	@BeforeSuite
 	public void ExtentReport() {
@@ -72,7 +67,9 @@ public class Driver {
 		opt.addArguments("disable-infobars");
 		System.setProperty("webdriver.chrome.driver", "D:\\Jars\\Chrome\\chromedriver_win32\\chromedriver.exe");
 		driver = new ChromeDriver(opt);
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		driver.manage().window().maximize();	
+		getdriver();
 	}
 	
 	@AfterMethod
@@ -91,11 +88,6 @@ public class Driver {
 		}	
 		driver.close();
 		driver.quit();
-	}
-	
-	@AfterMethod
-	public void teardown() {
-		
 	}
 	
 

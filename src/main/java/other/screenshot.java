@@ -17,9 +17,13 @@ public class screenshot{
 		
 		String path = System.getProperty("user.dir") + File.separator + "screenshot" + File.separator + result.getMethod().getMethodName() + ".png";
 		System.out.println(path);
-		File file = ((TakesScreenshot)Driver.driver).getScreenshotAs(OutputType.FILE);
+		
+		TakesScreenshot Ss = (TakesScreenshot)Driver.driver;
+		File src  = Ss.getScreenshotAs(OutputType.FILE);
+		
+		//File file = ((TakesScreenshot)Driver.driver).getScreenshotAs(OutputType.FILE);
 		try {
-			FileUtils.copyFile(file , new File(path));
+			FileUtils.copyFile(src , new File(path));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
